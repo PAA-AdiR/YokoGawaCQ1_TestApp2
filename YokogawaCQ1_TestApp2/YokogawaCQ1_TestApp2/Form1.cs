@@ -140,5 +140,39 @@ namespace YokogawaCQ1_TestApp2
         {
             var status = TestClient.GetStatus(out var deviceLocked);
         }
+
+        private async void btnOpen_Click(object sender, EventArgs e)
+        {
+            // lock device
+            await Task.Run(() => DoAction("LockDevice", (id) => client.Proxy.LockDevice(id, lockID, lockTimeout, eventURI, pmsID), State.Standby));
+
+            await Task.Run(() => DoAction("Initialize", (id) => client.Proxy.Initialize(id, lockID)));// idle
+
+            // open
+            await Task.Run(() => DoAction("OpenDoor", (id) => client.Proxy.OpenDoor(id, lockID)));
+
+            // reset and unlock device
+            // reset as a software emergency stop
+            await Task.Run(() => DoAction("Reset", (id) => client.Proxy.Reset(id, lockID, deviceID, eventURI, pmsID, errorHandlingTimeout, false), State.Standby));
+
+            await Task.Run(() => DoAction("UnlockDevice", (id) => client.Proxy.UnlockDevice(id, lockID), State.Standby));
+        }
+
+        private async void btnClose_Click(object sender, EventArgs e)
+        {
+            // lock device
+            await Task.Run(() => DoAction("LockDevice", (id) => client.Proxy.LockDevice(id, lockID, lockTimeout, eventURI, pmsID), State.Standby));
+
+            await Task.Run(() => DoAction("Initialize", (id) => client.Proxy.Initialize(id, lockID)));// idle
+
+            // close
+            await Task.Run(() => DoAction("CloseDoor", (id) => client.Proxy.CloseDoor(id, lockID)));
+
+            // reset and unlock device
+            // reset as a software emergency stop
+            await Task.Run(() => DoAction("Reset", (id) => client.Proxy.Reset(id, lockID, deviceID, eventURI, pmsID, errorHandlingTimeout, false), State.Standby));
+
+            await Task.Run(() => DoAction("UnlockDevice", (id) => client.Proxy.UnlockDevice(id, lockID), State.Standby));
+        }
     }
 }
