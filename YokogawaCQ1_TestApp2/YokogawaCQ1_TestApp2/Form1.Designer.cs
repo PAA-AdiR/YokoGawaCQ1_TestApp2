@@ -32,6 +32,7 @@ namespace YokogawaCQ1_TestApp2
             this.btnConnect = new System.Windows.Forms.Button();
             this.btnDisconnect = new System.Windows.Forms.Button();
             this.btnPrepare = new System.Windows.Forms.Button();
+            this.btnGetStatus = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnConnect
@@ -64,11 +65,22 @@ namespace YokogawaCQ1_TestApp2
             this.btnPrepare.UseVisualStyleBackColor = true;
             this.btnPrepare.Click += new System.EventHandler(this.btnPrepare_Click);
             // 
+            // btnGetStatus
+            // 
+            this.btnGetStatus.Location = new System.Drawing.Point(114, 170);
+            this.btnGetStatus.Name = "btnGetStatus";
+            this.btnGetStatus.Size = new System.Drawing.Size(75, 23);
+            this.btnGetStatus.TabIndex = 3;
+            this.btnGetStatus.Text = "Get Status";
+            this.btnGetStatus.UseVisualStyleBackColor = true;
+            this.btnGetStatus.Click += new System.EventHandler(this.btnGetStatus_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnGetStatus);
             this.Controls.Add(this.btnPrepare);
             this.Controls.Add(this.btnDisconnect);
             this.Controls.Add(this.btnConnect);
@@ -83,6 +95,7 @@ namespace YokogawaCQ1_TestApp2
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.Button btnDisconnect;
         private System.Windows.Forms.Button btnPrepare;
+        private System.Windows.Forms.Button btnGetStatus;
     }
 }
 

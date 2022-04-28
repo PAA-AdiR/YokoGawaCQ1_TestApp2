@@ -83,6 +83,8 @@ namespace YokogawaCQ1_TestApp2
             TestClient.DisConnect();
         }
 
+
+
         /// <summary>
         /// Timeout until an errorhandling state is changed into an error state.
         /// </summary>
@@ -132,6 +134,11 @@ namespace YokogawaCQ1_TestApp2
         {
             var result = TestClient.DoAction(commandName, act, status, null, timeout, addLog);
             return result;
+        }
+
+        private void btnGetStatus_Click(object sender, EventArgs e)
+        {
+            var status = TestClient.GetStatus(out var deviceLocked);
         }
     }
 }
