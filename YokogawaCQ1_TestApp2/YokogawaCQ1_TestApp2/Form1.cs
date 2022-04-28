@@ -136,6 +136,17 @@ namespace YokogawaCQ1_TestApp2
             return result;
         }
 
+        /// <summary>
+        /// Execute Method
+        /// </summary>
+        /// <param name="act">deligate of method</param>
+        /// <returns>MessageData</returns>
+        ResponseData DoFunc(string commandName, Func<int, SiLAReturnValue> act, State? status = State.Idle, bool addLog = true)
+        {
+            var result = TestClient.DoFunc(commandName, act, status, null, addLog);
+            return result;
+        }
+
         private void btnGetStatus_Click(object sender, EventArgs e)
         {
             var status = TestClient.GetStatus(out var deviceLocked);
@@ -167,6 +178,26 @@ namespace YokogawaCQ1_TestApp2
 
             // close
             await Task.Run(() => DoAction("CloseDoor", (id) => client.Proxy.CloseDoor(id, lockID)));
+
+            // reset and unlock device
+            // reset as a software emergency stop
+            await Task.Run(() => DoAction("Reset", (id) => client.Proxy.Reset(id, lockID, deviceID, eventURI, pmsID, errorHandlingTimeout, false), State.Standby));
+
+            await Task.Run(() => DoAction("UnlockDevice", (id) => client.Proxy.UnlockDevice(id, lockID), State.Standby));
+        }
+
+        private async void btnGetProtocols_Click(object sender, EventArgs e)
+        {
+            // lock device
+            await Task.Run(() => DoAction("LockDevice", (id) => client.Proxy.LockDevice(id, lockID, lockTimeout, eventURI, pmsID), State.Standby));
+
+            await Task.Run(() => DoAction("Initialize", (id) => client.Proxy.Initialize(id, lockID)));// idle
+
+            // get protocols
+            var res = await Task.Run(() => DoFunc("GetMeasurementProtocols", (id) => client.Proxy.ExecuteMethod(id, lockID, EMethodName.GetMeasurementProtocols.ToString(), null)));
+            var pset = (ParameterSet)(res.Items.First());
+            // pset.Parameter
+            var protocolList = pset.Parameter.Select(a => a.Item.ToString());
 
             // reset and unlock device
             // reset as a software emergency stop

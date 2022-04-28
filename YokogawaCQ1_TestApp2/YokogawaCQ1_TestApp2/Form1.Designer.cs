@@ -35,6 +35,7 @@ namespace YokogawaCQ1_TestApp2
             this.btnGetStatus = new System.Windows.Forms.Button();
             this.btnOpen = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
+            this.btnGetProtocols = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnConnect
@@ -97,11 +98,22 @@ namespace YokogawaCQ1_TestApp2
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // btnGetProtocols
+            // 
+            this.btnGetProtocols.Location = new System.Drawing.Point(197, 355);
+            this.btnGetProtocols.Name = "btnGetProtocols";
+            this.btnGetProtocols.Size = new System.Drawing.Size(151, 23);
+            this.btnGetProtocols.TabIndex = 6;
+            this.btnGetProtocols.Text = "Get Protocols";
+            this.btnGetProtocols.UseVisualStyleBackColor = true;
+            this.btnGetProtocols.Click += new System.EventHandler(this.btnGetProtocols_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnGetProtocols);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnOpen);
             this.Controls.Add(this.btnGetStatus);
@@ -122,6 +134,7 @@ namespace YokogawaCQ1_TestApp2
         private System.Windows.Forms.Button btnGetStatus;
         private System.Windows.Forms.Button btnOpen;
         private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnGetProtocols;
     }
 }
 
